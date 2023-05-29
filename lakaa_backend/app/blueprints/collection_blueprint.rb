@@ -5,6 +5,6 @@ class CollectionBlueprint < Blueprinter::Base
   field :collected_at
 
   view :with_indicators do
-    association :collection_indicators, blueprint: CollectionIndicatorBlueprint, name: :indicators, view: :simple
+    association :collection_indicators, blueprint: CollectionIndicatorBlueprint, view: :simple
   end
 end
