@@ -2,20 +2,20 @@ class IndicatorsController < ApplicationController
   before_action :set_indicator, only: %i[ show update destroy ]
 
   def index
-    @indicators = Indicator.all
+    @indicators = Indicator.all.order(:id)
 
     render json: IndicatorBlueprint.render(@indicators)
   end
 
   def show
-    render json: @indicator
+    render json: IndicatorBlueprint.render(@indicator)
   end
 
   def create
     @indicator = Indicator.new(indicator_params)
 
     if @indicator.save
-      render json: IndicatorBlueprint.render(@indicators), status: :created, location: @indicator
+      render json: IndicatorBlueprint.render(@indicator), status: :created, location: @indicator
     else
       render json: @indicator.errors, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class IndicatorsController < ApplicationController
 
   def update
     if @indicator.update(indicator_params)
-      render json: IndicatorBlueprint.render(@indicators)
+      render json: IndicatorBlueprint.render(@indicator)
     else
       render json: @indicator.errors, status: :unprocessable_entity
     end

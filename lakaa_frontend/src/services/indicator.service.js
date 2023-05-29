@@ -16,6 +16,11 @@ class IndicatorService {
     return response.data;
   }
 
+  async findAllRequired() {
+    const indicators = await this.findAll();
+    return indicators.filter(indicator => indicator.required);
+  }
+
   async findOne(id) {
     const response = await this.api.get(`/indicators/${id}`);
     return response.data;
@@ -27,10 +32,14 @@ class IndicatorService {
     });
   }
 
-  async update(id, indicator) {
-    return this.api.patch(`/indicators/${id}`, {
-      indicator
+  async update(indicator) {
+    return this.api.patch(`/indicators/${indicator.id}`, {
+      required: indicator.required
     });
+  }
+
+  async remove(indicator) {
+    return this.api.delete(`/indicators/${indicator.id}`, {});
   }
 }
 

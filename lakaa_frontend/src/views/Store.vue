@@ -12,23 +12,18 @@
   </ul>
   <button @click="create">New collection</button>
 
-  <div>
-  	<div v-for="collection in collections" class="collection">
-  		{{ collection.organization_name }}: {{ collection.collected_at }}
-  		<ul>
-			<li v-for="indicator in collection.collection_indicators">
-				{{ indicator.name }}: {{ indicator.value }} {{ indicator.unit }}
-			</li>
-		</ul>
-  	</div>
+  <div v-for="collection in collections" class="collection">
+  	<CollectionCard :collection="collection" />
   </div>
 </template>
 
 <script>
   import CollectionService from "../services/collection.service";
   import IndicatorService from "../services/indicator.service";
+  import CollectionCard from "../components/CollectionCard.vue";
 
   export default {
+  	components: { CollectionCard },
     data() {
       return {
         newCollection: {
@@ -54,12 +49,13 @@
 	  },
 
       async create() {
-        console.log(await CollectionService.create(this.newCollection));
+        const res = await CollectionService.create(this.newCollection);
+        this.collections.push(res.data);
         this.reset();
       },
 
       async setIndicators() {
-      	this.newCollection.indicators = await IndicatorService.findAll();
+      	this.newCollection.indicators = await IndicatorService.findAllRequired();
       }
     },
   };
