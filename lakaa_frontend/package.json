@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "chota": "^0.9.2",
     "vue": "^3.2.47",
     "vue-axios": "^3.5.2",
     "vue-router": "^4.2.1"

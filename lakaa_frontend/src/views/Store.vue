@@ -1,20 +1,43 @@
 
 <template>
-  <h1>Store</h1>
+	<h1 class="is-center">Store</h1>
 
-  <input v-model="newCollection.organization_name" placeholder="Organization name" />
-  <input v-model="newCollection.collected_at" type='date' placeholder="Collection date" />
-  <ul>
-  	<li v-for="indicator in newCollection.indicators">
-  		{{ indicator.name }}: {{ indicator.unit }}
-  		<input v-model="indicator.value" placeholder="Indicator value" />
-  	</li>
-  </ul>
-  <button @click="create">New collection</button>
+	<div class="card">
+		<header><h4>Create collection</h4></header>
+ 		<div class="row">
+  			<div class="col">
+	  			<input v-model="newCollection.organization_name" placeholder="Organization name" />
+  			</div>
+  			<div class="col">
+				<input v-model="newCollection.collected_at" type='date' placeholder="Collection date" />
+ 			</div>
+  		</div>
 
-  <div v-for="collection in collections" class="collection">
-  	<CollectionCard :collection="collection" />
-  </div>
+  		<h4>Indicators</h4>
+  		<div class="container">
+	  		<div class="row" v-for="indicator in newCollection.indicators">
+	  			<div class="col">
+		  			{{ indicator.name }}
+	  			</div>
+	  			<div class="col-3">
+	  				<input v-model="indicator.value" placeholder="Indicator value" />
+		  		</div>
+		  		<div class="col">
+		  			{{ indicator.unit }}
+	  			</div>
+	  		</div>
+	  	</div>
+  		<footer class="is-right">
+  			<button class="button primary" @click="create">New collection</button>
+  		</footer>
+	</div>
+
+	<h4 class="is-center">Past collections</h4>
+	<hr />
+
+	<div v-for="collection in collections">
+		<CollectionCard :collection="collection" />
+	</div>
 </template>
 
 <script>
@@ -62,10 +85,4 @@
 </script>
 
 <style scoped>
-	.collection {
-		margin: 10px;
-		border: 1px solid white;
-		border-radius: 10px;
-	}
-
 </style>
