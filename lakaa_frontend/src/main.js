@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 // import './style.css'
-import * as Vue from 'chota'
+import 'chota'
 
 import { securedAxiosInstance, plainAxiosInstance } from './services/axios'
 import router from './services/router'

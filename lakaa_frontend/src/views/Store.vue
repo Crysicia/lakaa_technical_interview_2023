@@ -4,14 +4,17 @@
 
 	<div class="card">
 		<header><h4>Create collection</h4></header>
+ 		<FormError :errors="errorMessage" />
  		<div class="row">
-  			<div class="col">
-	  			<input v-model="newCollection.organization_name" placeholder="Organization name" />
-  			</div>
-  			<div class="col">
-				<input v-model="newCollection.collected_at" type='date' placeholder="Collection date" />
+			<div class="col">
+  			<label for="organization_name">Organization name</label>
+  			<input id="organization_name" v-model="newCollection.organization_name" placeholder="Organization name" />
+			</div>
+			<div class="col">
+  			<label for="collected_at">Collection date</label>
+				<input id="collected_at" v-model="newCollection.collected_at" type='date' placeholder="Collection date" />
  			</div>
-  		</div>
+		</div>
 
   		<h4>Indicators</h4>
   		<div class="container">
@@ -44,9 +47,10 @@
   import CollectionService from "../services/collection.service";
   import IndicatorService from "../services/indicator.service";
   import CollectionCard from "../components/CollectionCard.vue";
+  import FormError from "../components/FormError.vue";
 
   export default {
-  	components: { CollectionCard },
+  	components: { CollectionCard, FormError },
     data() {
       return {
         newCollection: {
@@ -55,31 +59,37 @@
           indicators: [],
         },
         collections: [],
+        errorMessage: ''
       }
     },
     async mounted() {
-	  this.collections = await CollectionService.findAll();
-	  this.setIndicators();
-	},
+		  this.collections = await CollectionService.findAll();
+		  this.setIndicators();
+		},
     methods: {
       reset() {
-		this.newCollection = {
-		  organization_name: '',
-		  collected_at: '',
-		  indicators: [],
-		};
-		this.setIndicators();
-	  },
+				this.newCollection = {
+				  organization_name: '',
+				  collected_at: '',
+				  indicators: [],
+				};
+				this.errorMessage = ''
+				this.setIndicators();
+		  },
 
       async create() {
-        const res = await CollectionService.create(this.newCollection);
-        this.collections.push(res.data);
-        this.reset();
+      	try {
+	        const res = await CollectionService.create(this.newCollection);
+	        this.collections.push(res.data);
+	        this.reset();
+      	} catch (error) {
+      		this.errorMessage = error.response.data;
+      	}
       },
 
       async setIndicators() {
       	this.newCollection.indicators = await IndicatorService.findAllRequired();
-      }
+      },
     },
   };
 </script>

@@ -2,7 +2,7 @@ class CollectionsController < ApplicationController
   before_action :set_collection, only: %i[ show update destroy ]
 
   def index
-    @collections = Collection.all
+    @collections = Collection.all.order(collected_at: :desc)
 
     render json: CollectionBlueprint.render(@collections, view: :with_indicators)
   end

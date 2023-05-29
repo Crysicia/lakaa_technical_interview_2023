@@ -3,6 +3,7 @@
   <h1 class="is-center">CSR</h1>
     <div class="card">
       <header><h4>Create indicator</h4></header>
+      <FormError :errors="errorMessage" />
       <div class="row">
         <div class="col">
           <input v-model="newIndicator.name" placeholder="Indicator name" />
@@ -59,9 +60,10 @@
   import CollectionService from "../services/collection.service";
   import IndicatorService from "../services/indicator.service";
   import CollectionCard from "../components/CollectionCard.vue";
+  import FormError from "../components/FormError.vue";
 
   export default {
-    components: { CollectionCard },
+    components: { CollectionCard, FormError },
     data() {
       return {
         newIndicator: {
@@ -71,6 +73,7 @@
         },
         collections: [],
         indicators: [],
+        errorMessage: ''
       }
     },
     async mounted() {
@@ -83,21 +86,34 @@
           name: '',
           unit: '',
           required: true,
-        };
+        }
+        this.errorMessage = ''
       },
 
       async create() {
-        const res = await IndicatorService.create(this.newIndicator);
-        this.indicators.push(res.data);
-        this.reset();
+        try {
+          const res = await IndicatorService.create(this.newIndicator);
+          this.indicators.push(res.data);
+          this.reset();
+        } catch (error) {
+          this.errorMessage = error.response.data;
+        }
       },
 
       async update(indicator) {
-       await IndicatorService.update(indicator);
+        try {
+          await IndicatorService.update(indicator);
+        } catch (error) {
+          this.errorMessage = error.response.data;
+        }
       },
 
       async remove(indicator) {
-       await IndicatorService.remove(indicator);
+        try {
+          await IndicatorService.remove(indicator);
+        } catch (error) {
+          this.errorMessage = error.response.data;
+        }
       }
     },
   };

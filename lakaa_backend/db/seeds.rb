@@ -12,7 +12,7 @@ CollectionIndicator.destroy_all
 Indicator.destroy_all
 Collection.destroy_all
 
-Indicator.create(name: "Number of participants", unit: "people", required: true)
+Indicator.create(name: "Number of participants", unit: "peoples", required: true)
 Indicator.create(name: "Food weight", unit: "kg", required: true)
 
 4.times do
@@ -20,7 +20,7 @@ Indicator.create(name: "Food weight", unit: "kg", required: true)
     organization_name: Faker::University.name,
     collected_at: Faker::Time.between(from: DateTime.now - 150, to: DateTime.now - 1),
   )
-  new_collection.collection_indicators.build(indicator: Indicator.first, value: Faker::Number.between(from: 1, to: 100)).save
-  new_collection.collection_indicators.build(indicator: Indicator.last, value: Faker::Number.between(from: 1, to: 100)).save
+  new_collection.collection_indicators.build(indicator: Indicator.first, value: Faker::Number.between(from: 1, to: 100))
+  new_collection.collection_indicators.build(indicator: Indicator.last, value: Faker::Number.between(from: 1, to: 100))
   new_collection.save!
 end
