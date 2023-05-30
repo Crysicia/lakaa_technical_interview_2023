@@ -5,6 +5,7 @@
 - Go to the backend folder: `cd lakaa_backend`
 - Install the dependencies `bundle install`
 - Create the database and run the migrations `rails db:create db:migrate`
+- Seed the database `rails db:seed
 - Run the server `rails s`
 
 **Frontend**
