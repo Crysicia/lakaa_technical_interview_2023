@@ -34,23 +34,17 @@
   			<button class="button primary" @click="create">New collection</button>
   		</footer>
 	</div>
-
-	<h4 class="is-center">Past collections</h4>
-	<hr />
-
-	<div v-for="collection in collections">
-		<CollectionCard :collection="collection" />
-	</div>
+	<PastCollections :collections="collections" />
 </template>
 
 <script>
   import CollectionService from "../services/collection.service";
   import IndicatorService from "../services/indicator.service";
-  import CollectionCard from "../components/CollectionCard.vue";
+  import PastCollections from "../components/PastCollections.vue";
   import FormError from "../components/FormError.vue";
 
   export default {
-  	components: { CollectionCard, FormError },
+  	components: { PastCollections, FormError },
     data() {
       return {
         newCollection: {

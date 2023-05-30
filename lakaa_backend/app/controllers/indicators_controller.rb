@@ -2,7 +2,7 @@ class IndicatorsController < ApplicationController
   before_action :set_indicator, only: %i[ show update destroy ]
 
   def index
-    @indicators = Indicator.all.order(:id)
+    @indicators = Indicator.displayable.order(:id)
 
     render json: IndicatorBlueprint.render(@indicators)
   end

@@ -22,3 +22,5 @@
 ## What I would like to improve 🚀
 - Filtre des collectes par association / indicateur.
 - Ajout d'unités cohérentes pour chaque indicateur.
+- Restaurations d'indicateurs supprimés.
+- Edition de collectes passées.

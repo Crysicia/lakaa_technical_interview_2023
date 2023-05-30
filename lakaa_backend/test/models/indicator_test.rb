@@ -8,6 +8,7 @@
 #  required   :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  deleted    :boolean          default(FALSE), not null
 #
 require "test_helper"
 
