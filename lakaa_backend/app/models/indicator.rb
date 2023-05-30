@@ -15,5 +15,5 @@ class Indicator < ApplicationRecord
 
   validates :name, presence: true
   validates :unit, presence: true
-  validates :required, presence: true
+  validates :required, inclusion: [true, false]
 end

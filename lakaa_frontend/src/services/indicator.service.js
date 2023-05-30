@@ -34,7 +34,7 @@ class IndicatorService {
 
   async update(indicator) {
     return this.api.patch(`/indicators/${indicator.id}`, {
-      required: indicator.required
+      indicator
     });
   }
 
