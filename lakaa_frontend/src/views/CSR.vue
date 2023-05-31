@@ -106,6 +106,7 @@
       async remove(indicator) {
         try {
           await IndicatorService.remove(indicator);
+          this.indicators = this.indicators.filter(i => i.id !== indicator.id);
         } catch (error) {
           this.errorMessage = error.response.data;
         }
