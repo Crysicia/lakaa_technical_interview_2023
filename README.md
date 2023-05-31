@@ -5,13 +5,13 @@
 - Go to the backend folder: `cd lakaa_backend`
 - Install the dependencies `bundle install`
 - Create the database and run the migrations `rails db:create db:migrate`
-- Seed the database `rails db:seed
+- Seed the database `rails db:seed`
 - Run the server `rails s`
 
 **Frontend**
 - Go to the frontend folder: `cd lakaa_frontend`
 - Install the dependencies `npm install`
-- Run the server `npm start dev`
+- Run the server `npm run dev`
 
 ## Technical choices ⚙️
 **ahem** let's switch back to french for this one.
